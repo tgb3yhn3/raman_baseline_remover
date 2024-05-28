@@ -230,6 +230,8 @@ if args.wp:
     wl = int(args.wp.split(':')[0])
     po = int(args.wp.split(':')[1])
 file_output_path=args.output_dir
+if file_output_path is None:
+        file_output_path = os.getcwd() 
 show_summary=args.show_summary
 #lamda for Whittaker filter / smoothing
 whittaker_lmd = args.whittaker
@@ -295,7 +297,8 @@ if add:
         freqdict[key]=add_x_to_freq(freqdict[key],add)
 
 #if True save summary.pdf
-if save_pdf:    
+if save_pdf:  
+     
     pdf = PdfPages(file_output_path+"\\summary.pdf")
 
 #only one data set
@@ -503,7 +506,7 @@ if save_pdf:
     pdf.savefig()
 #save to png
 if save_plots_png:
-    plt.savefig('summary.png', dpi=figure_dpi)
+    plt.savefig(file_output_path+"/"+'summary.png', dpi=figure_dpi)
 
 #show the summary plot
 if show_summary:
